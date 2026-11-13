@@ -1,0 +1,17 @@
+name = "domino-bot"
+main = "index.js"
+compatibility_date = "2024-11-01"
+
+# Crie o KV com:  npx wrangler kv namespace create PENDING
+# e cole o id abaixo.
+[[kv_namespaces]]
+binding = "PENDING"
+id = "COLE_O_ID_DO_KV_AQUI"
+
+[vars]
+GITHUB_REPO = "SEU_USUARIO/domino"   # usuário/repositório
+GITHUB_BRANCH = "main"
+ALLOWED_IDS = "SEU_ID_DO_TELEGRAM"   # separe vários por vírgula
+
+# Segredos (NÃO ficam aqui; veja o README):
+#   TELEGRAM_TOKEN, WEBHOOK_SECRET, GITHUB_TOKEN

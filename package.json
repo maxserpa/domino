@@ -1,0 +1,13 @@
+{
+  "name": "domino-bot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node test/run.mjs && node test/worker.mjs",
+    "deploy:worker": "wrangler deploy --config worker/wrangler.toml"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}

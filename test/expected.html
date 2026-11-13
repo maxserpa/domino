@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Jogos de Dominó - Caixa Festa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 6px;
+            padding-bottom: 25px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 4px;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-size: 1.15em;
+        }
+        .caixa-banner {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .caixa-banner h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .caixa-banner p {
+            margin: 2px 0 0 0;
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+        .table-container {
+            width: 100%;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            background: #fff;
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            table-layout: fixed;
+        }
+        th, td {
+            padding: 6px 4px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            font-size: 0.82em;
+            word-wrap: break-word;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            padding: 8px 4px;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        /* Larguras otimizadas para Celular */
+        .tabla-placar th:nth-child(1) { width: 38%; }
+        .tabla-placar th:nth-child(2) { width: 20%; }
+        .tabla-placar th:nth-child(3) { width: 20%; }
+        .tabla-placar th:nth-child(4) { width: 22%; }
+
+        .tabla-historico th:nth-child(1) { width: 18%; }
+        .tabla-historico th:nth-child(2) { width: 38%; }
+        .tabla-historico th:nth-child(3) { width: 44%; }
+
+        .winner-name {
+            display: block;
+            font-weight: 600;
+            line-height: 1.25;
+            color: #2c3e50;
+        }
+        .player-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin: 2px 0;
+            font-size: 0.82em;
+            gap: 2px;
+        }
+        .badge-pago {
+            background-color: #2ecc71;
+            color: white;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .badge-pendente {
+            background-color: #e74c3c;
+            color: white;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .saldo-positivo {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .saldo-negativo {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .saldo-neutro {
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                margin: 4px;
+            }
+            th, td {
+                padding: 6px 3px;
+                font-size: 0.78em;
+            }
+            .player-status {
+                padding: 2px 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Caixa Banner -->
+    <div class="caixa-banner">
+        <h1>R$ 510,00</h1>
+        <p>Valor total em caixa</p>
+    </div>
+
+    <h2>Placar consolidado</h2>
+    <div class="table-container">
+        <table class="tabla-placar">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="text-center">Vitórias</th>
+                    <th class="text-center">Derrotas</th>
+                    <th class="text-right">Saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Osnildo</td><td class="text-center">6</td><td class="text-center">3</td><td class="text-right saldo-positivo">3</td></tr>
+                <tr><td>Junior</td><td class="text-center">3</td><td class="text-center">0</td><td class="text-right saldo-positivo">3</td></tr>
+                <tr><td>Nildo</td><td class="text-center">7</td><td class="text-center">5</td><td class="text-right saldo-positivo">2</td></tr>
+                <tr><td>Luizinho</td><td class="text-center">8</td><td class="text-center">7</td><td class="text-right saldo-positivo">1</td></tr>
+                <tr><td>Rubens</td><td class="text-center">6</td><td class="text-center">5</td><td class="text-right saldo-positivo">1</td></tr>
+                <tr><td>Hugo</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-right saldo-positivo">1</td></tr>
+                <tr><td>Reinaldo</td><td class="text-center">6</td><td class="text-center">6</td><td class="text-right saldo-neutro">0</td></tr>
+                <tr><td>Ricardo</td><td class="text-center">4</td><td class="text-center">4</td><td class="text-right saldo-neutro">0</td></tr>
+                <tr><td>Romeu</td><td class="text-center">4</td><td class="text-center">4</td><td class="text-right saldo-neutro">0</td></tr>
+                <tr><td>Damilton</td><td class="text-center">4</td><td class="text-center">5</td><td class="text-right saldo-negativo">-1</td></tr>
+                <tr><td>Augusto</td><td class="text-center">4</td><td class="text-center">6</td><td class="text-right saldo-negativo">-2</td></tr>
+                <tr><td>Gonzaga</td><td class="text-center">1</td><td class="text-center">3</td><td class="text-right saldo-negativo">-2</td></tr>
+                <tr><td>Max</td><td class="text-center">3</td><td class="text-center">9</td><td class="text-right saldo-negativo">-6</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Histórico de Partidas</h2>
+    <div class="table-container">
+        <table class="tabla-historico">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Dupla Vencedora</th>
+                    <th>Dupla Perdedora / Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>02/11/2026</td>
+                    <td>
+                        <span class="winner-name">Nildo</span>
+                        <span class="winner-name">Romeu</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Hugo <span class="badge-pendente">Pendente</span></div>
+                        <div class="player-status">Luizinho <span class="badge-pendente">Pendente</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>02/11/2026</td>
+                    <td>
+                        <span class="winner-name">Hugo</span>
+                        <span class="winner-name">Luizinho</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Nildo <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Romeu <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>02/11/2026</td>
+                    <td>
+                        <span class="winner-name">Damilton</span>
+                        <span class="winner-name">Rubens</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Gonzaga <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Reinaldo <span class="badge-pendente">Pendente</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>02/11/2026</td>
+                    <td>
+                        <span class="winner-name">Hugo</span>
+                        <span class="winner-name">Max</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Gonzaga <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Luizinho <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>26/10/2026</td>
+                    <td>
+                        <span class="winner-name">Nildo</span>
+                        <span class="winner-name">Romeu</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Luizinho <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Ricardo <span class="badge-pendente">Pendente</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12/10/2026</td>
+                    <td>
+                        <span class="winner-name">Damilton</span>
+                        <span class="winner-name">Junior</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Luizinho <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12/10/2026</td>
+                    <td>
+                        <span class="winner-name">Junior</span>
+                        <span class="winner-name">Luizinho</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Damilton <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12/10/2026</td>
+                    <td>
+                        <span class="winner-name">Reinaldo</span>
+                        <span class="winner-name">Rubens</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Nildo <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Ricardo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12/10/2026</td>
+                    <td>
+                        <span class="winner-name">Reinaldo</span>
+                        <span class="winner-name">Rubens</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Nildo <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Ricardo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12/10/2026</td>
+                    <td>
+                        <span class="winner-name">Junior</span>
+                        <span class="winner-name">Luizinho</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Damilton <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>06/10/2026</td>
+                    <td>
+                        <span class="winner-name">Luizinho</span>
+                        <span class="winner-name">Rubens</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Augusto <span class="badge-pendente">Pendente</span></div>
+                        <div class="player-status">Reinaldo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>30/09/2026</td>
+                    <td>
+                        <span class="winner-name">Augusto</span>
+                        <span class="winner-name">Luizinho</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Osnildo <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Rubens <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>29/09/2026</td>
+                    <td>
+                        <span class="winner-name">Osnildo</span>
+                        <span class="winner-name">Rubens</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Damilton <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>03/08/2026</td>
+                    <td>
+                        <span class="winner-name">Augusto</span>
+                        <span class="winner-name">Ricardo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Osnildo <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Reinaldo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>29/06/2026</td>
+                    <td>
+                        <span class="winner-name">Gonzaga</span>
+                        <span class="winner-name">Max</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Nildo <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Osnildo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12/06/2026</td>
+                    <td>
+                        <span class="winner-name">Augusto</span>
+                        <span class="winner-name">Osnildo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Luizinho <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Reinaldo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>25/05/2026</td>
+                    <td>
+                        <span class="winner-name">Augusto</span>
+                        <span class="winner-name">Reinaldo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Rubens <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>25/05/2026</td>
+                    <td>
+                        <span class="winner-name">Damilton</span>
+                        <span class="winner-name">Reinaldo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Rubens <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>25/05/2026</td>
+                    <td>
+                        <span class="winner-name">Osnildo</span>
+                        <span class="winner-name">Ricardo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Augusto <span class="badge-pendente">Pendente</span></div>
+                        <div class="player-status">Gonzaga <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>18/05/2026</td>
+                    <td>
+                        <span class="winner-name">Luizinho</span>
+                        <span class="winner-name">Nildo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Damilton <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Reinaldo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>18/05/2026</td>
+                    <td>
+                        <span class="winner-name">Osnildo</span>
+                        <span class="winner-name">Rubens</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Luizinho <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Romeu <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>28/04/2026</td>
+                    <td>
+                        <span class="winner-name">Damilton</span>
+                        <span class="winner-name">Nildo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Augusto <span class="badge-pendente">Pendente</span></div>
+                        <div class="player-status">Romeu <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>06/04/2026</td>
+                    <td>
+                        <span class="winner-name">Max</span>
+                        <span class="winner-name">Reinaldo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Luizinho <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Nildo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>30/03/2026</td>
+                    <td>
+                        <span class="winner-name">Luizinho</span>
+                        <span class="winner-name">Ricardo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Romeu <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>16/03/2026</td>
+                    <td>
+                        <span class="winner-name">Osnildo</span>
+                        <span class="winner-name">Romeu</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Damilton <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Rubens <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>16/03/2026</td>
+                    <td>
+                        <span class="winner-name">Osnildo</span>
+                        <span class="winner-name">Romeu</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Augusto <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>02/03/2026</td>
+                    <td>
+                        <span class="winner-name">Luizinho</span>
+                        <span class="winner-name">Nildo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Augusto <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Reinaldo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>02/02/2026</td>
+                    <td>
+                        <span class="winner-name">Nildo</span>
+                        <span class="winner-name">Reinaldo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Max <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Ricardo <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>19/01/2026</td>
+                    <td>
+                        <span class="winner-name">Nildo</span>
+                        <span class="winner-name">Ricardo</span>
+                    </td>
+                    <td>
+                        <div class="player-status">Augusto <span class="badge-pago">Pago</span></div>
+                        <div class="player-status">Rubens <span class="badge-pago">Pago</span></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

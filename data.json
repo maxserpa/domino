@@ -1,0 +1,828 @@
+{
+ "valor": 10,
+ "aliases": {
+  "danilton": "Damilton",
+  "gonzaa": "Gonzaga",
+  "reinaldoeinaldo": "Reinaldo",
+  "hogo": "Hugo"
+ },
+ "events": [
+  {
+   "id": "e1",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-01-19",
+   "win": [
+    "Nildo",
+    "Ricardo"
+   ],
+   "los": [
+    "Augusto",
+    "Rubens"
+   ]
+  },
+  {
+   "id": "e2",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-01-19",
+   "name": "Rubens",
+   "count": 1
+  },
+  {
+   "id": "e3",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-02-02",
+   "win": [
+    "Nildo",
+    "Reinaldo"
+   ],
+   "los": [
+    "Max",
+    "Ricardo"
+   ]
+  },
+  {
+   "id": "e4",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-02-02",
+   "name": "Max",
+   "count": 1
+  },
+  {
+   "id": "e5",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-03-02",
+   "win": [
+    "Luizinho",
+    "Nildo"
+   ],
+   "los": [
+    "Reinaldo",
+    "Augusto"
+   ]
+  },
+  {
+   "id": "e6",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-03-02",
+   "name": "Ricardo",
+   "count": 1
+  },
+  {
+   "id": "e7",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-03-16",
+   "win": [
+    "Osnildo",
+    "Romeu"
+   ],
+   "los": [
+    "Augusto",
+    "Max"
+   ]
+  },
+  {
+   "id": "e8",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-03-16",
+   "win": [
+    "Osnildo",
+    "Romeu"
+   ],
+   "los": [
+    "Rubens",
+    "Damilton"
+   ]
+  },
+  {
+   "id": "e9",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-03-18",
+   "name": "Reinaldo",
+   "count": 1
+  },
+  {
+   "id": "e10",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-03-30",
+   "win": [
+    "Ricardo",
+    "Luizinho"
+   ],
+   "los": [
+    "Romeu",
+    "Max"
+   ]
+  },
+  {
+   "id": "e11",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-03-31",
+   "name": "Damilton",
+   "count": 1
+  },
+  {
+   "id": "e12",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-04-06",
+   "name": "Romeu",
+   "count": 1
+  },
+  {
+   "id": "e13",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-04-06",
+   "win": [
+    "Max",
+    "Reinaldo"
+   ],
+   "los": [
+    "Luizinho",
+    "Nildo"
+   ]
+  },
+  {
+   "id": "e14",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-04-06",
+   "name": "Luizinho",
+   "count": 1
+  },
+  {
+   "id": "e15",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-04-06",
+   "name": "Rubens",
+   "count": 1
+  },
+  {
+   "id": "e16",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-04-06",
+   "name": "Nildo",
+   "count": 1
+  },
+  {
+   "id": "e17",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-04-28",
+   "win": [
+    "Damilton",
+    "Nildo"
+   ],
+   "los": [
+    "Augusto",
+    "Romeu"
+   ]
+  },
+  {
+   "id": "e18",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-05-18",
+   "win": [
+    "Rubens",
+    "Osnildo"
+   ],
+   "los": [
+    "Romeu",
+    "Luizinho"
+   ]
+  },
+  {
+   "id": "e19",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-05-18",
+   "win": [
+    "Luizinho",
+    "Nildo"
+   ],
+   "los": [
+    "Damilton",
+    "Reinaldo"
+   ]
+  },
+  {
+   "id": "e20",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-05-25",
+   "win": [
+    "Osnildo",
+    "Ricardo"
+   ],
+   "los": [
+    "Gonzaga",
+    "Augusto"
+   ]
+  },
+  {
+   "id": "e21",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-05-25",
+   "name": "Gonzaga",
+   "count": 1
+  },
+  {
+   "id": "e22",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-05-25",
+   "win": [
+    "Damilton",
+    "Reinaldo"
+   ],
+   "los": [
+    "Max",
+    "Rubens"
+   ]
+  },
+  {
+   "id": "e23",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-05-25",
+   "win": [
+    "Augusto",
+    "Reinaldo"
+   ],
+   "los": [
+    "Max",
+    "Rubens"
+   ]
+  },
+  {
+   "id": "e24",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-05-25",
+   "name": "Rubens",
+   "count": 1
+  },
+  {
+   "id": "e25",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-05-25",
+   "name": "Rubens",
+   "count": 1
+  },
+  {
+   "id": "e26",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-06-12",
+   "win": [
+    "Osnildo",
+    "Augusto"
+   ],
+   "los": [
+    "Luizinho",
+    "Reinaldo"
+   ]
+  },
+  {
+   "id": "e27",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-06-16",
+   "name": "Romeu",
+   "count": 1
+  },
+  {
+   "id": "e28",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-06-16",
+   "name": "Damilton",
+   "count": 1
+  },
+  {
+   "id": "e29",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-06-22",
+   "name": "Osnildo",
+   "count": 1
+  },
+  {
+   "id": "e30",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-06-29",
+   "win": [
+    "Max",
+    "Gonzaga"
+   ],
+   "los": [
+    "Osnildo",
+    "Nildo"
+   ]
+  },
+  {
+   "id": "e31",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-07",
+   "name": "Osnildo",
+   "count": 1
+  },
+  {
+   "id": "e32",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-07",
+   "name": "Nildo",
+   "count": 1
+  },
+  {
+   "id": "e33",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-07",
+   "name": "Luizinho",
+   "count": 1
+  },
+  {
+   "id": "e34",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-07",
+   "name": "Reinaldo",
+   "count": 1
+  },
+  {
+   "id": "e35",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-27",
+   "name": "Augusto",
+   "count": 1
+  },
+  {
+   "id": "e36",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-27",
+   "name": "Augusto",
+   "count": 1
+  },
+  {
+   "id": "e37",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-07-27",
+   "name": "Reinaldo",
+   "count": 1
+  },
+  {
+   "id": "e38",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-08-03",
+   "win": [
+    "Augusto",
+    "Ricardo"
+   ],
+   "los": [
+    "Osnildo",
+    "Reinaldo"
+   ]
+  },
+  {
+   "id": "e39",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-08-17",
+   "name": "Reinaldo",
+   "count": 1
+  },
+  {
+   "id": "e40",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-09-29",
+   "win": [
+    "Osnildo",
+    "Rubens"
+   ],
+   "los": [
+    "Max",
+    "Damilton"
+   ]
+  },
+  {
+   "id": "e41",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-09-30",
+   "win": [
+    "Augusto",
+    "Luizinho"
+   ],
+   "los": [
+    "Osnildo",
+    "Rubens"
+   ]
+  },
+  {
+   "id": "e42",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-06",
+   "name": "Damilton",
+   "count": 1
+  },
+  {
+   "id": "e43",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-06",
+   "name": "Rubens",
+   "count": 1
+  },
+  {
+   "id": "e44",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-06",
+   "win": [
+    "Rubens",
+    "Luizinho"
+   ],
+   "los": [
+    "Reinaldo",
+    "Augusto"
+   ]
+  },
+  {
+   "id": "e45",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-12",
+   "win": [
+    "Junior",
+    "Luizinho"
+   ],
+   "los": [
+    "Damilton",
+    "Max"
+   ]
+  },
+  {
+   "id": "e46",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-12",
+   "win": [
+    "Reinaldo",
+    "Rubens"
+   ],
+   "los": [
+    "Nildo",
+    "Ricardo"
+   ]
+  },
+  {
+   "id": "e47",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-12",
+   "win": [
+    "Reinaldo",
+    "Rubens"
+   ],
+   "los": [
+    "Nildo",
+    "Ricardo"
+   ]
+  },
+  {
+   "id": "e48",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-12",
+   "win": [
+    "Junior",
+    "Luizinho"
+   ],
+   "los": [
+    "Damilton",
+    "Max"
+   ]
+  },
+  {
+   "id": "e49",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-12",
+   "win": [
+    "Junior",
+    "Damilton"
+   ],
+   "los": [
+    "Luizinho",
+    "Max"
+   ]
+  },
+  {
+   "id": "e50",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-12",
+   "name": "Nildo",
+   "count": 1
+  },
+  {
+   "id": "e51",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-12",
+   "name": "Nildo",
+   "count": 1
+  },
+  {
+   "id": "e52",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-12",
+   "name": "Luizinho",
+   "count": 1
+  },
+  {
+   "id": "e53",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-10-26",
+   "win": [
+    "Romeu",
+    "Nildo"
+   ],
+   "los": [
+    "Ricardo",
+    "Luizinho"
+   ]
+  },
+  {
+   "id": "e54",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Ricardo",
+   "count": 1
+  },
+  {
+   "id": "e55",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Ricardo",
+   "count": 1
+  },
+  {
+   "id": "e56",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Luizinho",
+   "count": 1
+  },
+  {
+   "id": "e57",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Augusto",
+   "count": 1
+  },
+  {
+   "id": "e58",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Damilton",
+   "count": 2
+  },
+  {
+   "id": "e59",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Romeu",
+   "count": 1
+  },
+  {
+   "id": "e60",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-10-29",
+   "name": "Luizinho",
+   "count": 1
+  },
+  {
+   "id": "e61",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-11-02",
+   "win": [
+    "Max",
+    "Hugo"
+   ],
+   "los": [
+    "Luizinho",
+    "Gonzaga"
+   ]
+  },
+  {
+   "id": "e62",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-11-02",
+   "name": "Luizinho",
+   "count": 1
+  },
+  {
+   "id": "e63",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-11-02",
+   "name": "Gonzaga",
+   "count": 1
+  },
+  {
+   "id": "e64",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-11-02",
+   "win": [
+    "Rubens",
+    "Damilton"
+   ],
+   "los": [
+    "Reinaldo",
+    "Gonzaga"
+   ]
+  },
+  {
+   "id": "e65",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-11-02",
+   "win": [
+    "Hugo",
+    "Luizinho"
+   ],
+   "los": [
+    "Nildo",
+    "Romeu"
+   ]
+  },
+  {
+   "id": "e66",
+   "batch": "inicial",
+   "type": "game",
+   "date": "2026-11-02",
+   "win": [
+    "Nildo",
+    "Romeu"
+   ],
+   "los": [
+    "Hugo",
+    "Luizinho"
+   ]
+  },
+  {
+   "id": "e67",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-11-02",
+   "name": "Romeu",
+   "count": 1
+  },
+  {
+   "id": "e68",
+   "batch": "inicial",
+   "type": "pay",
+   "date": "2026-11-02",
+   "name": "Nildo",
+   "count": 1
+  },
+  {
+   "id": "e69",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-03-16"
+  },
+  {
+   "id": "e70",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-03-30"
+  },
+  {
+   "id": "e71",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-05-25"
+  },
+  {
+   "id": "e72",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-05-25"
+  },
+  {
+   "id": "e73",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Gonzaga",
+   "count": 1,
+   "gameDate": "2026-11-02"
+  },
+  {
+   "id": "e74",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Reinaldo",
+   "count": 1,
+   "gameDate": "2026-10-06"
+  },
+  {
+   "id": "e75",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Osnildo",
+   "count": 1,
+   "gameDate": "2026-09-30"
+  },
+  {
+   "id": "e76",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-09-29"
+  },
+  {
+   "id": "e77",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-10-12"
+  },
+  {
+   "id": "e78",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-10-12"
+  },
+  {
+   "id": "e79",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-04",
+   "name": "Max",
+   "count": 1,
+   "gameDate": "2026-10-12"
+  }
+ ]
+}
