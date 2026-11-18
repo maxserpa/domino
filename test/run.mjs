@@ -14,6 +14,8 @@ assert.equal(st.games.length, 29);
 assert.equal(st.cash, 510);
 assert.equal(st.pendingTotal, 70);
 assert.deepEqual(st.owed, { Augusto: 3, Ricardo: 1, Reinaldo: 1, Luizinho: 1, Hugo: 1 });
+assert.deepEqual(st.owedDetail.Augusto, ['2026-04-28', '2026-05-25', '2026-10-06']);
+assert.deepEqual(st.owedDetail.Luizinho, ['2026-11-02']);
 const max = st.ranking.find((p) => p.name === 'Max');
 assert.deepEqual([max.wins, max.losses, max.saldo], [3, 9, -6]);
 

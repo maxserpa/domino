@@ -76,6 +76,10 @@
         .tabla-placar th:nth-child(3) { width: 20%; }
         .tabla-placar th:nth-child(4) { width: 22%; }
 
+        .tabla-pendentes th:nth-child(1) { width: 28%; }
+        .tabla-pendentes th:nth-child(2) { width: 24%; }
+        .tabla-pendentes th:nth-child(3) { width: 48%; }
+
         .tabla-historico th:nth-child(1) { width: 18%; }
         .tabla-historico th:nth-child(2) { width: 38%; }
         .tabla-historico th:nth-child(3) { width: 44%; }
@@ -134,6 +138,14 @@
         .text-right {
             text-align: right;
         }
+        .valor-devido {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .datas-pendentes {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
 
         @media screen and (max-width: 480px) {
             body {
@@ -182,6 +194,46 @@
                 <tr><td>Augusto</td><td class="text-center">4</td><td class="text-center">6</td><td class="text-right saldo-negativo">-2</td></tr>
                 <tr><td>Gonzaga</td><td class="text-center">1</td><td class="text-center">3</td><td class="text-right saldo-negativo">-2</td></tr>
                 <tr><td>Max</td><td class="text-center">3</td><td class="text-center">9</td><td class="text-right saldo-negativo">-6</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Valores Pendentes</h2>
+    <div class="table-container">
+        <table class="tabla-pendentes">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th>Datas das Partidas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Augusto</strong></td>
+                    <td class="valor-devido">R$ 30,00</td>
+                    <td class="datas-pendentes">(28/04, 25/05, 06/10)</td>
+                </tr>
+                <tr>
+                    <td><strong>Hugo</strong></td>
+                    <td class="valor-devido">R$ 10,00</td>
+                    <td class="datas-pendentes">(02/11)</td>
+                </tr>
+                <tr>
+                    <td><strong>Luizinho</strong></td>
+                    <td class="valor-devido">R$ 10,00</td>
+                    <td class="datas-pendentes">(02/11)</td>
+                </tr>
+                <tr>
+                    <td><strong>Reinaldo</strong></td>
+                    <td class="valor-devido">R$ 10,00</td>
+                    <td class="datas-pendentes">(02/11)</td>
+                </tr>
+                <tr>
+                    <td><strong>Ricardo</strong></td>
+                    <td class="valor-devido">R$ 10,00</td>
+                    <td class="datas-pendentes">(26/10)</td>
+                </tr>
             </tbody>
         </table>
     </div>

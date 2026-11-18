@@ -825,10 +825,24 @@
    "gameDate": "2026-10-12"
   },
   {
+   "id": "a1",
+   "batch": "ajustes",
+   "type": "game",
+   "date": "2026-11-08",
+   "win": [
+    "Junior",
+    "Luizinho"
+   ],
+   "los": [
+    "Augusto",
+    "Osnildo"
+   ]
+  },
+  {
    "id": "e1795029241764",
    "batch": "b1795029241517",
    "type": "game",
-   "date": "2026-11-18",
+   "date": "2026-11-16",
    "win": [
     "Gonzaga",
     "Osnildo"
@@ -853,6 +867,15 @@
    "date": "2026-11-18",
    "name": "Ricardo",
    "count": 1
+  },
+  {
+   "id": "a2",
+   "batch": "ajustes",
+   "type": "pay",
+   "date": "2026-11-18",
+   "name": "Reinaldo",
+   "count": 1,
+   "gameDate": "2026-11-02"
   }
  ]
 }

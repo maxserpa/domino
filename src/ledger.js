@@ -67,6 +67,10 @@ export function computeState(data) {
 
   const owed = {};
   for (const [name, q] of Object.entries(pending)) if (q.length) owed[name] = q.length;
+  const owedDetail = {};
+  for (const [name, q] of Object.entries(pending)) {
+    if (q.length) owedDetail[name] = q.map((x) => x.g.date).sort();
+  }
   const pendingCount = Object.values(owed).reduce((a, b) => a + b, 0);
 
   return {
@@ -74,6 +78,7 @@ export function computeState(data) {
     games,
     ranking,
     owed,
+    owedDetail,
     cash: payCount * valor,
     pendingCount,
     pendingTotal: pendingCount * valor,

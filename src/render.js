@@ -25,13 +25,24 @@ export function renderBody(state) {
     })
     .join('\n');
 
-  return { caixa, placar, historico };
+  const nomes = Object.keys(state.owedDetail).sort(byName);
+  const pendentes = nomes.length
+    ? nomes
+        .map((n) => {
+          const datas = state.owedDetail[n].map((d) => fmtDate(d).slice(0, 5)).join(', ');
+          return `                <tr>\n                    <td><strong>${n}</strong></td>\n                    <td class="valor-devido">R$ ${brl(state.owedDetail[n].length * state.valor)}</td>\n                    <td class="datas-pendentes">(${datas})</td>\n                </tr>`;
+        })
+        .join('\n')
+    : '                <tr><td colspan="3" class="text-center">Nenhuma pendência</td></tr>';
+
+  return { caixa, placar, pendentes, historico };
 }
 
 export function renderHtml(template, state) {
-  const { caixa, placar, historico } = renderBody(state);
+  const { caixa, placar, pendentes, historico } = renderBody(state);
   return template
-    .replace('<!--CAIXA-->', caixa)
-    .replace('<!--PLACAR-->', placar)
-    .replace('<!--HISTORICO-->', historico);
+    .replace('<!--CAIXA-->', () => caixa)
+    .replace('<!--PLACAR-->', () => placar)
+    .replace('<!--PENDENTES-->', () => pendentes)
+    .replace('<!--HISTORICO-->', () => historico);
 }
