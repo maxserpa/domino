@@ -837,6 +837,22 @@
     "Luizinho",
     "Ricardo"
    ]
+  },
+  {
+   "id": "e1795029592142",
+   "batch": "b1795029591932",
+   "type": "pay",
+   "date": "2026-11-18",
+   "name": "Osnildo",
+   "count": 1
+  },
+  {
+   "id": "e1795029592143",
+   "batch": "b1795029591932",
+   "type": "pay",
+   "date": "2026-11-18",
+   "name": "Ricardo",
+   "count": 1
   }
  ]
 }
