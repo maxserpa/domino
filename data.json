@@ -823,6 +823,20 @@
    "name": "Max",
    "count": 1,
    "gameDate": "2026-10-12"
+  },
+  {
+   "id": "e1795029241764",
+   "batch": "b1795029241517",
+   "type": "game",
+   "date": "2026-11-18",
+   "win": [
+    "Gonzaga",
+    "Osnildo"
+   ],
+   "los": [
+    "Luizinho",
+    "Ricardo"
+   ]
   }
  ]
 }
