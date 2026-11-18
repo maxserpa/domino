@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import worker from '../worker/index.js';
 
-let repoFile = readFileSync(new URL('../data.json', import.meta.url), 'utf8');
+let repoFile = readFileSync(new URL('./fixture.json', import.meta.url), 'utf8');
 let sha = 'sha0';
 const sent = [];
 const commits = [];

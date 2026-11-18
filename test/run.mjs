@@ -5,7 +5,8 @@ import { parseMessage } from '../src/parser.js';
 import { renderHtml } from '../src/render.js';
 
 const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
-const data = JSON.parse(read('../data.json'));
+// Os testes usam uma cópia fixa dos dados (fixture), para não quebrarem quando o bot gravar lisas novas.
+const data = JSON.parse(read('./fixture.json'));
 const st = computeState(data);
 
 // 1) Estado atual bate com o que foi conferido na mão
@@ -67,5 +68,15 @@ assert.equal(s2.games[0].los[0].paid, true);   // A: crédito abateu a 1ª
 assert.equal(s2.games[1].los[1].paid, true);   // B: quitou a de 02/01
 assert.equal(s2.games[0].los[1].paid, false);  // B continua devendo a de 01/01
 assert.equal(s2.cash, 20);
+
+// 5) O data.json real continua válido (formato e cálculo), sem fixar números
+const live = JSON.parse(read('../data.json'));
+const ls = computeState(live);
+assert.ok(ls.games.length >= 29);
+for (const e of live.events) {
+  assert.ok(['game', 'pay'].includes(e.type), `tipo inválido: ${e.type}`);
+  if (e.type === 'game') assert.ok(e.win.length === 2 && e.los.length === 2 && /^\d{4}-\d{2}-\d{2}$/.test(e.date));
+  if (e.type === 'pay') assert.ok(e.name && e.count >= 1);
+}
 
 console.log('Todos os testes passaram.');

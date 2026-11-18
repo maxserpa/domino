@@ -3,7 +3,7 @@ name: Publicar tabela
 on:
   push:
     branches: [main]
-    paths: [data.json, template.html, 'src/**', 'scripts/**', '.github/workflows/pages.yml']
+    paths: [data.json, template.html, 'src/**', 'scripts/**', 'test/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
