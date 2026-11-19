@@ -120,6 +120,23 @@
             font-weight: bold;
             flex-shrink: 0;
         }
+        .tabla-placar th.ord {
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .tabla-placar th.ord::after {
+            content: " \2195";
+            opacity: 0.45;
+            font-size: 0.85em;
+        }
+        .tabla-placar th.ord[aria-sort="ascending"]::after { content: " \25B2"; opacity: 1; }
+        .tabla-placar th.ord[aria-sort="descending"]::after { content: " \25BC"; opacity: 1; }
+        .dica-ordem {
+            margin: -4px 0 6px;
+            font-size: 0.72em;
+            color: #7f8c8d;
+        }
         .saldo-positivo {
             color: #27ae60;
             font-weight: bold;
@@ -170,30 +187,31 @@
     </div>
 
     <h2>Placar consolidado</h2>
+    <div class="dica-ordem">Em ordem alfabética. Toque no título da coluna para ordenar por vitórias, derrotas ou saldo.</div>
     <div class="table-container">
         <table class="tabla-placar">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th class="text-center">Vitórias</th>
-                    <th class="text-center">Derrotas</th>
-                    <th class="text-right">Saldo</th>
+                    <th class="ord" data-k="nome" aria-sort="ascending" tabindex="0">Nome</th>
+                    <th class="ord text-center" data-k="v" tabindex="0">Vitórias</th>
+                    <th class="ord text-center" data-k="d" tabindex="0">Derrotas</th>
+                    <th class="ord text-right" data-k="s" tabindex="0">Saldo</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Osnildo</td><td class="text-center">6</td><td class="text-center">3</td><td class="text-right saldo-positivo">3</td></tr>
-                <tr><td>Junior</td><td class="text-center">3</td><td class="text-center">0</td><td class="text-right saldo-positivo">3</td></tr>
-                <tr><td>Nildo</td><td class="text-center">7</td><td class="text-center">5</td><td class="text-right saldo-positivo">2</td></tr>
-                <tr><td>Luizinho</td><td class="text-center">8</td><td class="text-center">7</td><td class="text-right saldo-positivo">1</td></tr>
-                <tr><td>Rubens</td><td class="text-center">6</td><td class="text-center">5</td><td class="text-right saldo-positivo">1</td></tr>
-                <tr><td>Hugo</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-right saldo-positivo">1</td></tr>
-                <tr><td>Reinaldo</td><td class="text-center">6</td><td class="text-center">6</td><td class="text-right saldo-neutro">0</td></tr>
-                <tr><td>Ricardo</td><td class="text-center">4</td><td class="text-center">4</td><td class="text-right saldo-neutro">0</td></tr>
-                <tr><td>Romeu</td><td class="text-center">4</td><td class="text-center">4</td><td class="text-right saldo-neutro">0</td></tr>
-                <tr><td>Damilton</td><td class="text-center">4</td><td class="text-center">5</td><td class="text-right saldo-negativo">-1</td></tr>
-                <tr><td>Augusto</td><td class="text-center">4</td><td class="text-center">6</td><td class="text-right saldo-negativo">-2</td></tr>
-                <tr><td>Gonzaga</td><td class="text-center">1</td><td class="text-center">3</td><td class="text-right saldo-negativo">-2</td></tr>
-                <tr><td>Max</td><td class="text-center">3</td><td class="text-center">9</td><td class="text-right saldo-negativo">-6</td></tr>
+                <tr data-nome="Augusto" data-v="4" data-d="6" data-s="-2"><td>Augusto</td><td class="text-center">4</td><td class="text-center">6</td><td class="text-right saldo-negativo">-2</td></tr>
+                <tr data-nome="Damilton" data-v="4" data-d="5" data-s="-1"><td>Damilton</td><td class="text-center">4</td><td class="text-center">5</td><td class="text-right saldo-negativo">-1</td></tr>
+                <tr data-nome="Gonzaga" data-v="1" data-d="3" data-s="-2"><td>Gonzaga</td><td class="text-center">1</td><td class="text-center">3</td><td class="text-right saldo-negativo">-2</td></tr>
+                <tr data-nome="Hugo" data-v="2" data-d="1" data-s="1"><td>Hugo</td><td class="text-center">2</td><td class="text-center">1</td><td class="text-right saldo-positivo">1</td></tr>
+                <tr data-nome="Junior" data-v="3" data-d="0" data-s="3"><td>Junior</td><td class="text-center">3</td><td class="text-center">0</td><td class="text-right saldo-positivo">3</td></tr>
+                <tr data-nome="Luizinho" data-v="8" data-d="7" data-s="1"><td>Luizinho</td><td class="text-center">8</td><td class="text-center">7</td><td class="text-right saldo-positivo">1</td></tr>
+                <tr data-nome="Max" data-v="3" data-d="9" data-s="-6"><td>Max</td><td class="text-center">3</td><td class="text-center">9</td><td class="text-right saldo-negativo">-6</td></tr>
+                <tr data-nome="Nildo" data-v="7" data-d="5" data-s="2"><td>Nildo</td><td class="text-center">7</td><td class="text-center">5</td><td class="text-right saldo-positivo">2</td></tr>
+                <tr data-nome="Osnildo" data-v="6" data-d="3" data-s="3"><td>Osnildo</td><td class="text-center">6</td><td class="text-center">3</td><td class="text-right saldo-positivo">3</td></tr>
+                <tr data-nome="Reinaldo" data-v="6" data-d="6" data-s="0"><td>Reinaldo</td><td class="text-center">6</td><td class="text-center">6</td><td class="text-right saldo-neutro">0</td></tr>
+                <tr data-nome="Ricardo" data-v="4" data-d="4" data-s="0"><td>Ricardo</td><td class="text-center">4</td><td class="text-center">4</td><td class="text-right saldo-neutro">0</td></tr>
+                <tr data-nome="Romeu" data-v="4" data-d="4" data-s="0"><td>Romeu</td><td class="text-center">4</td><td class="text-center">4</td><td class="text-right saldo-neutro">0</td></tr>
+                <tr data-nome="Rubens" data-v="6" data-d="5" data-s="1"><td>Rubens</td><td class="text-center">6</td><td class="text-center">5</td><td class="text-right saldo-positivo">1</td></tr>
             </tbody>
         </table>
     </div>
@@ -572,5 +590,47 @@
         </table>
     </div>
 
+<script>
+(function () {
+    var tabela = document.querySelector('.tabla-placar');
+    if (!tabela) return;
+    var corpo = tabela.tBodies[0];
+    var cabecalhos = tabela.querySelectorAll('th.ord');
+    var chave = 'nome', asc = true;
+
+    function ordenar() {
+        var linhas = Array.prototype.slice.call(corpo.rows);
+        linhas.sort(function (a, b) {
+            var r;
+            if (chave === 'nome') {
+                r = a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR');
+            } else {
+                r = Number(a.dataset[chave]) - Number(b.dataset[chave]);
+                if (r === 0) return a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR');
+            }
+            return asc ? r : -r;
+        });
+        linhas.forEach(function (l) { corpo.appendChild(l); });
+        cabecalhos.forEach(function (th) {
+            if (th.dataset.k === chave) th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+            else th.removeAttribute('aria-sort');
+        });
+    }
+
+    function clicar(th) {
+        var k = th.dataset.k;
+        if (k === chave) asc = !asc;
+        else { chave = k; asc = (k === 'nome'); }   // números começam do maior para o menor
+        ordenar();
+    }
+
+    cabecalhos.forEach(function (th) {
+        th.addEventListener('click', function () { clicar(th); });
+        th.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clicar(th); }
+        });
+    });
+})();
+</script>
 </body>
 </html>

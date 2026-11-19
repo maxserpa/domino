@@ -120,6 +120,23 @@
             font-weight: bold;
             flex-shrink: 0;
         }
+        .tabla-placar th.ord {
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .tabla-placar th.ord::after {
+            content: " \2195";
+            opacity: 0.45;
+            font-size: 0.85em;
+        }
+        .tabla-placar th.ord[aria-sort="ascending"]::after { content: " \25B2"; opacity: 1; }
+        .tabla-placar th.ord[aria-sort="descending"]::after { content: " \25BC"; opacity: 1; }
+        .dica-ordem {
+            margin: -4px 0 6px;
+            font-size: 0.72em;
+            color: #7f8c8d;
+        }
         .saldo-positivo {
             color: #27ae60;
             font-weight: bold;
@@ -170,14 +187,15 @@
     </div>
 
     <h2>Placar consolidado</h2>
+    <div class="dica-ordem">Em ordem alfabética. Toque no título da coluna para ordenar por vitórias, derrotas ou saldo.</div>
     <div class="table-container">
         <table class="tabla-placar">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th class="text-center">Vitórias</th>
-                    <th class="text-center">Derrotas</th>
-                    <th class="text-right">Saldo</th>
+                    <th class="ord" data-k="nome" aria-sort="ascending" tabindex="0">Nome</th>
+                    <th class="ord text-center" data-k="v" tabindex="0">Vitórias</th>
+                    <th class="ord text-center" data-k="d" tabindex="0">Derrotas</th>
+                    <th class="ord text-right" data-k="s" tabindex="0">Saldo</th>
                 </tr>
             </thead>
             <tbody>
@@ -218,5 +236,47 @@
         </table>
     </div>
 
+<script>
+(function () {
+    var tabela = document.querySelector('.tabla-placar');
+    if (!tabela) return;
+    var corpo = tabela.tBodies[0];
+    var cabecalhos = tabela.querySelectorAll('th.ord');
+    var chave = 'nome', asc = true;
+
+    function ordenar() {
+        var linhas = Array.prototype.slice.call(corpo.rows);
+        linhas.sort(function (a, b) {
+            var r;
+            if (chave === 'nome') {
+                r = a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR');
+            } else {
+                r = Number(a.dataset[chave]) - Number(b.dataset[chave]);
+                if (r === 0) return a.dataset.nome.localeCompare(b.dataset.nome, 'pt-BR');
+            }
+            return asc ? r : -r;
+        });
+        linhas.forEach(function (l) { corpo.appendChild(l); });
+        cabecalhos.forEach(function (th) {
+            if (th.dataset.k === chave) th.setAttribute('aria-sort', asc ? 'ascending' : 'descending');
+            else th.removeAttribute('aria-sort');
+        });
+    }
+
+    function clicar(th) {
+        var k = th.dataset.k;
+        if (k === chave) asc = !asc;
+        else { chave = k; asc = (k === 'nome'); }   // números começam do maior para o menor
+        ordenar();
+    }
+
+    cabecalhos.forEach(function (th) {
+        th.addEventListener('click', function () { clicar(th); });
+        th.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clicar(th); }
+        });
+    });
+})();
+</script>
 </body>
 </html>

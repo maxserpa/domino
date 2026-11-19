@@ -6,10 +6,12 @@ const brl = (v) => v.toFixed(2).replace('.', ',');
 export function renderBody(state) {
   const caixa = `<h1>R$ ${brl(state.cash)}</h1>`;
 
-  const placar = state.ranking
+  // Ordem padrão: alfabética. A página permite reordenar por vitórias, derrotas ou saldo (clique no título da coluna).
+  const placar = [...state.ranking]
+    .sort((x, y) => byName(x.name, y.name))
     .map((p) => {
       const cls = p.saldo > 0 ? 'saldo-positivo' : p.saldo < 0 ? 'saldo-negativo' : 'saldo-neutro';
-      return `                <tr><td>${p.name}</td><td class="text-center">${p.wins}</td><td class="text-center">${p.losses}</td><td class="text-right ${cls}">${p.saldo}</td></tr>`;
+      return `                <tr data-nome="${p.name}" data-v="${p.wins}" data-d="${p.losses}" data-s="${p.saldo}"><td>${p.name}</td><td class="text-center">${p.wins}</td><td class="text-center">${p.losses}</td><td class="text-right ${cls}">${p.saldo}</td></tr>`;
     })
     .join('\n');
 
