@@ -876,20 +876,6 @@
    "name": "Reinaldo",
    "count": 1,
    "gameDate": "2026-11-02"
-  },
-  {
-   "id": "e1795087868935",
-   "batch": "b1795087868708",
-   "type": "game",
-   "date": "2026-11-19",
-   "win": [
-    "Max",
-    "Augusto"
-   ],
-   "los": [
-    "Osnildo",
-    "Junior"
-   ]
   }
  ]
 }
