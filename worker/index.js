@@ -1,7 +1,7 @@
 // Bot do Telegram (Cloudflare Worker): recebe mensagens encaminhadas, mostra uma prévia
 // com botões OK / Desfazer e, ao confirmar, faz commit do data.json no GitHub.
 import { computeState, knownPlayers } from '../src/ledger.js';
-import { parseMessage, describeEvent, fmtDate } from '../src/parser.js';
+import { parseMessage, parseDateText, describeEvent, fmtDate } from '../src/parser.js';
 
 const TZ = 'America/Sao_Paulo';
 
@@ -105,7 +105,8 @@ async function handle(update, env) {
       'Eu mostro uma prévia e você confirma com OK.\n\n' +
       'Pagamento de uma lisa específica: "Max pago 25/05"\n' +
       'Pagamento de várias: "Augusto pagou 20 reais"\n\n' +
-      'Comandos: /placar · /pendentes · /desfazer (apaga o último lançamento)');
+      'Data: se você encaminhar, vale a data da mensagem original. Se digitar, vale hoje; para outro dia escreva "dia 16/11" (ou "ontem") numa linha da mensagem.\n\n' +
+      'Comandos: /placar · /pendentes · /desfazer (apaga o último lançamento) · /data 16/11 (muda a data do último lançamento)');
   }
   if (text.startsWith('/placar') || text.startsWith('/pendentes')) {
     const { data } = await readData(env);
@@ -115,11 +116,13 @@ async function handle(update, env) {
     return say(env, msg.chat.id, `${linhas}\n\n${summary(st)}`);
   }
   if (text.startsWith('/desfazer')) return undo(env, msg.chat.id);
+  if (/^\/data\b/i.test(text)) return changeDate(env, msg.chat.id, text, isoFromUnix(msg.date));
   if (text.startsWith('/')) return say(env, msg.chat.id, 'Comando não reconhecido. Use /ajuda.');
 
   // Data: se foi encaminhada, usa a data da mensagem original; senão, a de hoje.
   const when = msg.forward_origin?.date ?? msg.forward_date ?? msg.date;
   const date = isoFromUnix(when);
+  const forwarded = Boolean(msg.forward_origin || msg.forward_date);
 
   const { data } = await readData(env);
   const result = parseMessage(text, { date, valor: data.valor, aliases: data.aliases, known: knownPlayers(data) });
@@ -137,6 +140,12 @@ async function handle(update, env) {
     const dup = data.events.some((x) => x.type === 'game' && x.date === ev.date &&
       [...x.win].sort().join() === [...ev.win].sort().join() && [...x.los].sort().join() === [...ev.los].sort().join());
     if (dup) avisos.push(`⚠️ Já existe um jogo igual em ${fmtDate(ev.date)}. Pode ser repetido; confira antes de dar OK.`);
+  }
+
+  if (!forwarded && !result.explicitDate) {
+    avisos.push(`📅 Data usada: ${fmtDate(result.date)} (hoje). Se foi em outro dia, aperte Desfazer e escreva "dia 16/11" na mensagem, ou grave e corrija depois com /data 16/11.`);
+  } else if (result.explicitDate) {
+    avisos.push(`📅 Data usada: ${fmtDate(result.date)} (a que você escreveu).`);
   }
 
   const id = crypto.randomUUID().slice(0, 8);
@@ -181,6 +190,30 @@ async function onCallback(cb, env) {
 function shortLabel(e) {
   if (e.type === 'game') return `lisa ${fmtDate(e.date)} ${e.win.join('+')} x ${e.los.join('+')}`;
   return `${e.name} pagou ${e.count}x`;
+}
+
+async function changeDate(env, chat_id, text, today) {
+  const m = /^\/data(?:@\w+)?\s+(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\s*$/i.exec(text.trim());
+  const iso = m && parseDateText(m[1], m[2], m[3], today);
+  if (!iso || iso > today) {
+    return say(env, chat_id, 'Use assim: /data 16/11 (ou /data 16/11/2026). Muda a data do último lançamento feito pelo bot.');
+  }
+  try {
+    let alterados = [];
+    const out = await commitData(env, `Dominó: muda a data do último lançamento para ${fmtDate(iso)}`, (data) => {
+      const last = data.events[data.events.length - 1];
+      if (!last || last.batch === 'inicial' || last.batch === 'ajustes') {
+        throw new Error('Não há lançamento do bot para mudar.');
+      }
+      for (const e of data.events) {
+        if (e.batch === last.batch) { e.date = iso; alterados.push(e); }
+      }
+    });
+    const st = computeState(out.data);
+    return say(env, chat_id, `📅 Data alterada para ${fmtDate(iso)}:\n${alterados.map((e) => describeEvent(e)).join('\n')}\n\n${summary(st)}`);
+  } catch (e) {
+    return say(env, chat_id, `❌ ${e.message}`);
+  }
 }
 
 async function undo(env, chat_id) {

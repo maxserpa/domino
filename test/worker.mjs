@@ -75,7 +75,7 @@ await post({ callback_query: { id: 'c2', from: { id: 42 }, data: ok, message: { 
 assert.equal(commits.length, 1);
 assert.match(last().text, /Gravado \(commit abcdef1\)/);
 const saved = JSON.parse(repoFile);
-assert.equal(saved.events.length, 79 + 2);
+assert.equal(saved.events.length, JSON.parse(readFileSync(new URL('./fixture.json', import.meta.url), 'utf8')).events.length + 2);
 assert.equal(saved.events.at(-2).date, '2026-11-12');
 
 // OK apertado de novo não grava em dobro
@@ -83,15 +83,39 @@ await post({ callback_query: { id: 'c3', from: { id: 42 }, data: ok, message: { 
 assert.equal(commits.length, 1);
 assert.match(last().text, /expirou/);
 
+// /data muda a data do último lançamento
+const baseLen = JSON.parse(readFileSync(new URL('./fixture.json', import.meta.url), 'utf8')).events.length;
+await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: unix('2026-11-13'), text: '/data 10/11' } });
+assert.match(last().text, /Data alterada para 10\/11\/2026/);
+assert.deepEqual(JSON.parse(repoFile).events.slice(-2).map((e) => e.date), ['2026-11-10', '2026-11-10']);
+assert.equal(JSON.parse(repoFile).events.length, baseLen + 2);
+
+await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: unix('2026-11-13'), text: '/data 99/99' } });
+assert.match(last().text, /Use assim/);
+await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: unix('2026-11-13'), text: '/data 20/11' } });
+assert.match(last().text, /Use assim/); // futuro não vale
+
+// digitado (não encaminhado) com "dia 16/11": usa a data escrita e avisa
+await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: unix('2026-11-13'), text: 'dia 12/11\nWIN: Max e Hugo\nLOS: Nildo e Romeu' } });
+assert.match(last().text, /12\/11\/2026: Max e Hugo venceram/);
+assert.match(last().text, /Data usada: 12\/11\/2026 \(a que você escreveu\)/);
+// digitado sem data: usa hoje e sugere como corrigir
+await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: unix('2026-11-13'), text: 'WIN: Max e Hugo\nLOS: Nildo e Romeu' } });
+assert.match(last().text, /13\/11\/2026: Max e Hugo venceram/);
+assert.match(last().text, /Data usada: 13\/11\/2026 \(hoje\)/);
+
 // /desfazer remove só o último lançamento do bot
 await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: 1, text: '/desfazer' } });
-assert.equal(JSON.parse(repoFile).events.length, 79);
+assert.equal(JSON.parse(repoFile).events.length, baseLen);
 assert.match(last().text, /Desfeito/);
 
 // /desfazer de novo não mexe no histórico inicial
 await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: 1, text: '/desfazer' } });
 assert.match(last().text, /Não há lançamento do bot/);
-assert.equal(JSON.parse(repoFile).events.length, 79);
+assert.equal(JSON.parse(repoFile).events.length, baseLen);
+// e /data também não mexe no histórico inicial
+await post({ message: { chat: { id: 1, type: 'private' }, from: { id: 42 }, date: unix('2026-11-13'), text: '/data 10/11' } });
+assert.match(last().text, /Não há lançamento do bot para mudar/);
 
 // grupo é ignorado
 const n = sent.length;

@@ -67,12 +67,15 @@ Abra o bot no Telegram e mande `/id`. Ele responde seu número. Coloque em `ALLO
 ## Como usar
 - **Encaminhe** para o bot uma mensagem do grupo. Pode ter jogo e pagamento juntos.
 - Ele responde com a prévia e dois botões: **✅ OK** grava e faz o commit; **↩️ Desfazer** descarta.
-- A data do lançamento é a da **mensagem original** (a data do encaminhamento é ignorada).
+- **Data do lançamento:**
+  - Mensagem **encaminhada**: vale a data da mensagem original.
+  - Mensagem **digitada**: vale hoje. Para outro dia, escreva numa linha `dia 16/11` (também aceita `data: 16/11/2026`, só `16/11`, `ontem` ou `anteontem`).
+  - Esqueceu e já gravou? Mande `/data 16/11` e o bot muda a data do último lançamento dele.
 - Formatos aceitos:
   - `WIN: Nildo e Romeu` / `LOS: Hugo e Luizinho` (a ordem das linhas tanto faz)
   - `Nildo pago` · `Augusto pagou 20 reais` (R$ 20 = 2 lisas)
   - `Max pago 25/05` quita especificamente a lisa de 25/05
-- Comandos: `/placar`, `/pendentes`, `/desfazer` (apaga o último lançamento feito pelo bot), `/ajuda`.
+- Comandos: `/placar`, `/pendentes`, `/desfazer` (apaga o último lançamento feito pelo bot), `/data 16/11` (muda a data do último lançamento do bot), `/ajuda`.
 - O bot avisa sobre **nome novo** (pode ser erro de digitação) e sobre **jogo igual já existente** na mesma data.
 
 ## Regras de cálculo

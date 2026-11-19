@@ -54,6 +54,43 @@ assert.equal(r.errors.length, 1);
 r = parseMessage('bom dia pessoal', ctx);
 assert.equal(r.events.length, 0);
 
+// 3b) Data escrita no texto
+const ctxD = { ...ctx, date: '2026-11-18' };
+r = parseMessage('dia 16/11\nLoser: Luizinho e Ricardo\nWin: Gonzaga e Osnildo', ctxD);
+assert.deepEqual(r.events, [{ type: 'game', date: '2026-11-16', win: ['Gonzaga', 'Osnildo'], los: ['Luizinho', 'Ricardo'] }]);
+assert.equal(r.explicitDate, true);
+assert.deepEqual(r.errors, []);
+
+r = parseMessage('WIN: Max e Hugo\nLOS: Nildo e Romeu\nData: 10/11/2026', ctxD); // data no fim, com "Data:" e ano
+assert.equal(r.events[0].date, '2026-11-10');
+
+r = parseMessage('ontem\nNildo pago', ctxD);
+assert.deepEqual(r.events.map((e) => [e.name, e.date]), [['Nildo', '2026-11-17']]);
+
+r = parseMessage('anteontem\nWIN: Max e Hugo\nLOS: Nildo e Romeu', ctxD);
+assert.equal(r.events[0].date, '2026-11-16');
+
+r = parseMessage('16/11\nWIN: Max e Hugo\nLOS: Nildo e Romeu', ctxD); // só a data numa linha
+assert.equal(r.events[0].date, '2026-11-16');
+
+r = parseMessage('dia 16/11 - WIN: Max e Hugo\nLOS: Nildo e Romeu', ctxD); // data e WIN na mesma linha
+assert.deepEqual([r.events[0].date, r.events[0].win], ['2026-11-16', ['Max', 'Hugo']]);
+
+r = parseMessage('WIN: Max e Hugo\nLOS: Nildo e Romeu', ctxD); // sem data escrita: vale a da mensagem
+assert.deepEqual([r.events[0].date, r.explicitDate], ['2026-11-18', false]);
+
+r = parseMessage('dia 28/12\nWIN: Max e Hugo\nLOS: Nildo e Romeu', { ...ctxD, date: '2027-01-05' }); // virada de ano
+assert.equal(r.events[0].date, '2026-12-28');
+
+r = parseMessage('dia 31/02\nWIN: Max e Hugo\nLOS: Nildo e Romeu', ctxD);
+assert.equal(r.errors.length, 1); // data que não existe
+
+r = parseMessage('dia 25/11\nWIN: Max e Hugo\nLOS: Nildo e Romeu', ctxD);
+assert.match(r.errors[0], /futuro/);
+
+r = parseMessage('dia 16/11\nMax pago 25/05', ctxD); // data da mensagem x data da lisa paga
+assert.deepEqual(r.events, [{ type: 'pay', date: '2026-11-16', name: 'Max', count: 1, gameDate: '2026-05-25' }]);
+
 // 4) Ledger: pagamento antecipado vira crédito; pagamento direcionado quita a lisa certa
 const mini = {
   valor: 10,
