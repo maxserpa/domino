@@ -898,6 +898,14 @@
    "date": "2026-11-23",
    "name": "Romeu",
    "count": 1
+  },
+  {
+   "id": "e1795477219601",
+   "batch": "b1795477219601",
+   "type": "pay",
+   "date": "2026-11-23",
+   "name": "Luizinho",
+   "count": 2
   }
  ]
 }
